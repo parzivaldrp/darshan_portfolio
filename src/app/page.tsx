@@ -1,103 +1,119 @@
 import Image from "next/image";
+import { Button } from "@/components/ui/buttons";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  User,
+  Briefcase,
+  Files,
+  ArrowRight ,
+} from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-background via-background/80 to-purple-100/40 px-4 sm:px-8">
+      <section className="w-full max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12 py-24 md:py-32 animate-fade-in">
+        {/* Left: Text Content */}
+        <div className="flex-1 flex flex-col gap-8 items-start">
+          <div className="flex items-center gap-2 text-muted-foreground animate-slide-in-left">
+            <MapPin className="w-4 h-4" />
+            <span>Available for opportunities</span>
+            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+          </div>
+          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight animate-fade-in-delayed">
+            Hi, I'm{' '}
+            <span className="bg-gradient-to-br from-primary to-purple-600 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300 inline-block">
+              Darshan
+            </span>
+          </h1>
+          <h2 className="text-2xl md:text-3xl font-semibold text-primary animate-slide-up">
+            Aspiring Full Stack Developer
+          </h2>
+          <p className="text-md md:text-md text-muted-foreground max-w-xl animate-slide-up-delayed">
+            Recent Computer Science graduate passionate about creating digital experiences. Eager to apply my skills in React, Node.js, and modern web technologies to build meaningful applications.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 w-full animate-fade-in">
+            <Link href="/Project" passHref >
+              <Button
+                size="sm"
+                className="text-sm p-5 px-8 font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-all group bg-primary text-white hover:bg-primary/90"
+                aria-label="View My Work"
+              >
+                <Briefcase className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
+                View My Work
+              </Button>
+            </Link>
+       
+            <Link href="/about" passHref >
+              <Button
+                variant="outline"
+                size="sm"
+                className="text-sm p-5 px-8 font-semibold hover:scale-105 transition-all group"
+                aria-label="About Me"
+              >
+                <Files className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                Resume
+              </Button>
+            </Link>
+          </div>
+          <div className="flex gap-4 mt-2 animate-slide-up">
+            <a href="https://github.com/parzivaldrp" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-pink-500/20 group transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-purple-500/25"
+              >
+                <Github className="w-5 h-5 group-hover:scale-110 transition-transform duration-300 group-hover:text-purple-400" />
+              </Button>
+            </a>
+            <a href="https://www.linkedin.com/in/darshan-panchal-11668129a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-purple-500/20 group transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/25"
+              >
+                <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform duration-300 group-hover:text-blue-400" />
+              </Button>
+            </a>
+            <a href="mailto:panchaldarshan507@gmail.com" aria-label="Email">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full hover:bg-gradient-to-r hover:from-red-500/20 hover:to-blue-500/20 group transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-red-500/25"
+              >
+                <Mail className="w-5 h-5 group-hover:scale-110 transition-transform duration-300 group-hover:text-red-400" />
+              </Button>
+            </a>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        {/* Right: Profile Image */}
+        <div className="flex-1 flex justify-center items-center animate-slide-in-right">
+          <div className="relative animate-slide-in-right">
+            <div className="z-10 glass-effect rounded-2xl p-2 hover-glow transition-all-smooth">
+              <div className="aspect-square  rounded-xl overflow-hidden animate-float hover:animate-pulse-glow transition-all-smooth">
+                <Image
+                  src="/darshan.png"
+                  alt="Darshan - Aspiring Full Stack Developer"
+                  className="w-full h-full object-contain hover:scale-105 transition-transform duration-500"
+                  width={800}
+                  height={800}
+                  priority
+                />
+              </div>
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-purple-600/20 rounded-2xl transform rotate-6 -z-10 animate-pulse-glow"></div>
+            <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-xl animate-float"></div>
+            <div
+              className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-xl animate-float"
+              style={{ animationDelay: "2s" }}
+            ></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
   );
 }
