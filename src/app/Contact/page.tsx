@@ -79,7 +79,7 @@ export default function Contact() {
       setTouched({});
 
       setTimeout(() => setStatus("idle"), 4000);
-    } catch (error) {
+    } catch {
       setStatus("error");
       setTimeout(() => setStatus("idle"), 3000);
     }
