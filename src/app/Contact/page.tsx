@@ -138,7 +138,7 @@ export default function Contact() {
             </div>
 
             <h1 className="text-6xl md:text-7xl font-extralight text-foreground mb-6 tracking-tight">
-              Let's
+             {`Let's`} 
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-emerald-600 bg-clip-text text-transparent font-light"> Connect</span>
             </h1>
 
