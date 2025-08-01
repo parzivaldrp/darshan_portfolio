@@ -15,13 +15,13 @@ export default function ProjectDialog({ project, children }: { project: Project,
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">{project.name}</DialogTitle>
         </DialogHeader>
-        <div className="mt-2">
+        <div className="mt-2 ">
           <Image
             src={project.image[0] || "/placeholder.svg"}
             alt={project.name}
             width={400}
             height={225}
-            className="object-cover rounded mb-4 w-full h-48"
+            className="object-cover rounded mb-4 "
           />
           <p className="mb-2 text-muted-foreground">{project.description}</p>
           <div className="mb-4 flex flex-wrap gap-2">

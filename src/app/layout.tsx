@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+
+
 
 
 
@@ -20,6 +24,7 @@ export default function RootLayout({
       <body>
         <Navigation />
         {children}
+        <ToastContainer />
         <Footer />
       </body>
     </html>
