@@ -1,4 +1,4 @@
-import Project from '@/app/models/Project';
+import Project from '@/models/Project';
 import fs from 'fs';
 import path from 'path';
 

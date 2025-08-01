@@ -1,11 +1,11 @@
-import projectControllers from '../controllers/projectControllers';
+import projectControllers from "@/app/api/controllers/projectControllers"
 import connectDB from '@/lib/connectDB';
 
 
-export async function POST(req) {
+export async function POST() {
     await connectDB();
     const res = new Response();
-    const response = await projectControllers(req, res);
+    const response = await projectControllers(res);
     return response;
 }
     

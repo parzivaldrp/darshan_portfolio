@@ -16,8 +16,8 @@ export default function ContactSection() {
           </div>
           <div className="glassmorphic rounded-2xl p-6">
             <p className="text-1xl max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
-              I'm always open to discussing new opportunities and interesting projects.
-              Let's create something amazing together!
+             {`I'm always open to discussing new opportunities and interesting projects.
+              Let's create something amazing together!`} 
             </p>
           </div>
         </div>

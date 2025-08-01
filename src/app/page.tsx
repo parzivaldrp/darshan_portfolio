@@ -5,10 +5,10 @@ import {
   Linkedin,
   Mail,
   MapPin,
-  User,
+
   Briefcase,
   Files,
-  ArrowRight ,
+  
 } from "lucide-react";
 import Link from "next/link";
 
@@ -24,7 +24,7 @@ export default function Home() {
             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
           </div>
           <h1 className="text-4xl md:text-6xl font-extrabold leading-tight animate-fade-in-delayed">
-            Hi, I'm{' '}
+            {`Hi, I'm`}{' '}
             <span className="bg-gradient-to-br from-primary to-purple-600 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300 inline-block">
               Darshan
             </span>

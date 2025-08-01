@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Plus, Edit, Trash2, Eye, ExternalLink, Github } from "lucide-react";
+import { Plus, Edit, Trash2, ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/buttons";
 import {
   Card,
@@ -20,9 +20,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Switch } from "@/components/ui/switch";
 import { fetchProjects, createProject } from "@/lib/api";
 import type { Project, CreateProjectRequest } from "@/types/project";
+import Image from "next/image";
 
 export default function Admin() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -114,7 +114,7 @@ export default function Admin() {
     }
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async () => {
     if (confirm("Are you sure you want to delete this project?")) {
       try {
         // await deleteProject(id);
@@ -347,13 +347,15 @@ export default function Admin() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
+          {projects.map((project) => (
             <Card key={project._id} className="group relative overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-primary/60 border border-transparent hover:bg-gradient-to-br hover:from-primary/10 hover:to-purple-600/10">
               <div className="aspect-video bg-muted relative overflow-hidden">
-                <img
+                <Image
                   src={project.image[0] || "/placeholder.svg"}
                   alt={project.name}
-                  className=" object-cover"
+                  width={400}
+                  height={225}
+                  className="object-cover w-full h-full"
                   onError={(e) => {
                     e.currentTarget.src = "/placeholder.svg";
                   }}
@@ -416,7 +418,7 @@ export default function Admin() {
                     <Button
                       size="sm"
                       variant="ghost"
-                      onClick={() => handleDelete(project._id)}
+                      onClick={() => handleDelete()}
                       className="text-destructive hover:text-destructive"
                     >
                       <Trash2 className="w-3 h-3" />

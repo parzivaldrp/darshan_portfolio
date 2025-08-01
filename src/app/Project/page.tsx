@@ -1,15 +1,14 @@
 'use client';
 import { useState, useEffect } from 'react'
-import { Button } from "@/components/ui/buttons";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Github, ArrowRight } from "lucide-react";
 import { fetchProjects } from '@/lib/api';
 import type { Project } from '@/types/project';
 import ProjectDialog from '@/components/ProjectDialog';
+import Image from 'next/image';
 
 
-const page = () => {
+const Project = () => {
 
     const [projects, setProjects] = useState<Project[]>([]);
     const [loading, setLoading] = useState(true);
@@ -59,10 +58,12 @@ const page = () => {
                                 style={{ animationDelay: `${index * 150}ms` }}
                             >
                                 <div className="aspect-video bg-gradient-to-br from-primary/20 to-primary-600/20 relative overflow-hidden">
-                                    <img
+                                    <Image
                                         src={project.image[0] || "/placeholder.svg"}
                                         alt={project.name}
-                                        className="object-cover group-hover:scale-110 transition-transform duration-300"
+                                        width={400}
+                                        height={225}
+                                        className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
                                         onError={(e) => {
                                             e.currentTarget.src = "/placeholder.svg";
                                         }}
@@ -96,4 +97,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Project

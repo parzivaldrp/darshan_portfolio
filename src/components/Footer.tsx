@@ -10,10 +10,10 @@ const Footer = () => {
     <section className="py-20 w-full bg-gradient-to-r from-primary to-primary-600 text-white">
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 className="text-3xl md:text-4xl font-bold mb-4">
-        Let's Work Together
+       {`Let's Work Together`} 
       </h2>
       <p className="text-xl text-primary-100 mb-8">
-        Have a project in mind? I'd love to help bring your ideas to life.
+        {`Have a project in mind? I'd love to help bring your ideas to life.`}
       </p>
       <Button
         size="lg"

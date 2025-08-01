@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Github, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/buttons";
 import type { Project } from "@/types/project";
+import Image from 'next/image';
 
 export default function ProjectDialog({ project, children }: { project: Project, children: React.ReactNode }) {
   return (
@@ -15,10 +16,12 @@ export default function ProjectDialog({ project, children }: { project: Project,
           <DialogTitle className="text-2xl font-bold">{project.name}</DialogTitle>
         </DialogHeader>
         <div className="mt-2">
-          <img
+          <Image
             src={project.image[0] || "/placeholder.svg"}
             alt={project.name}
-            className="object-cover rounded mb-4"
+            width={400}
+            height={225}
+            className="object-cover rounded mb-4 w-full h-48"
           />
           <p className="mb-2 text-muted-foreground">{project.description}</p>
           <div className="mb-4 flex flex-wrap gap-2">
