@@ -127,16 +127,16 @@ const Project = () => {
                                 transition={{ duration: 0.3 }}
                             >
                                 <Card className="group overflow-hidden cursor-pointer transition-all-smooth hover:shadow-2xl hover:shadow-primary/20 bg-card/60 backdrop-blur-sm border border-border/50">
-                                    <div className=" bg-gradient-to-br from-primary/10 to-primary/5 relative overflow-hidden">
+                                    <div className=" aspect-video bg-gradient-to-br from-primary/10 to-primary/5 relative overflow-hidden">
                                         <MotionImage
-                                            src={project.image?.[0] || "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=400&h=225&fit=crop"}
+                                            src={project.image?.[0] || "/placeholder.svg"}
                                             alt={project.name}
                                             width={400}
                                             height={225}
-                                            className="object-cover w-full h-[225px]"
+                                            className="object-cover "
                                             variants={imageVariants}
                                             whileHover="hover"
-                                            style={{ objectFit: "cover" }}
+                                          
                                         />
                                         <motion.div
                                             initial={{ opacity: 0 }}

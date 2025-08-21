@@ -1,10 +1,14 @@
-'use client'; import React, { useState, useRef } from "react";
+'use client';
+ import React, { useState, useRef } from "react";
 import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, User, MessageSquare, Hash } from "lucide-react";
 import { Button } from "@/components/ui/buttons";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { motion, AnimatePresence } from "framer-motion";
+import emailjs from 'emailjs-com'; 
+import { toast } from 'react-toastify';
+
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -54,6 +58,7 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    toast.info("Sending message...");
     // Validate all fields
     const newErrors: Record<string, string> = {};
     Object.keys(formData).forEach(key => {
@@ -70,8 +75,14 @@ export default function Contact() {
     setStatus("sending");
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+    await emailjs.sendForm(
+
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+      formRef.current!,
+      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+    );
+     
 
       setStatus("success");
       setFormData({ name: "", email: "", subject: "", message: "" });

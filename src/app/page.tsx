@@ -8,7 +8,7 @@ import {
 
   Briefcase,
   Files,
-  
+
 } from "lucide-react";
 import Link from "next/link";
 
@@ -46,8 +46,12 @@ export default function Home() {
                 View My Work
               </Button>
             </Link>
-       
-            <Link href="/about" passHref >
+
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button
                 variant="outline"
                 size="sm"
@@ -57,7 +61,7 @@ export default function Home() {
                 <Files className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 Resume
               </Button>
-            </Link>
+            </a>
           </div>
           <div className="flex gap-4 mt-2 animate-slide-up">
             <a href="https://github.com/parzivaldrp" target="_blank" rel="noopener noreferrer" aria-label="GitHub">

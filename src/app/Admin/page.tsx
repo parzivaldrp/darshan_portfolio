@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { Plus, Edit, Trash2, ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/buttons";
@@ -114,15 +113,30 @@ export default function Admin() {
     }
   };
 
-  const handleDelete = async () => {
+
+
+  const handleDelete = async (projectId: string) => {
     if (confirm("Are you sure you want to delete this project?")) {
       try {
-        // await deleteProject(id);
+        const res = await fetch(`/api/deleteProject/${projectId}`, {
+          method : 'DELETE',
+        });
+
+        const data =  await res.json();
+         if(!res.ok) throw new Error(data.message);
+
+         alert(data.message);
+
+         setProjects((prev) => prev.filter((proj) => proj._id !== projectId));
+
       } catch (error) {
         console.error("Error deleting project:", error);
       }
     }
   };
+
+
+
 
   const handleTechStackChange = (techStackString: string) => {
     const techStack = techStackString
@@ -351,11 +365,12 @@ export default function Admin() {
             <Card key={project._id} className="group relative overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-primary/60 border border-transparent hover:bg-gradient-to-br hover:from-primary/10 hover:to-purple-600/10">
               <div className="aspect-video bg-muted relative overflow-hidden">
                 <Image
-                  src={project.image[0] || "/placeholder.svg"}
+                  src={project.image?.[0] || "/placeholder.svg"}
                   alt={project.name}
                   width={400}
                   height={225}
-                  className="object-cover w-full h-full"
+                  className="object-cover"
+                  
                   onError={(e) => {
                     e.currentTarget.src = "/placeholder.svg";
                   }}
@@ -418,7 +433,7 @@ export default function Admin() {
                     <Button
                       size="sm"
                       variant="ghost"
-                      onClick={() => handleDelete()}
+                      onClick={() => handleDelete(project._id)}
                       className="text-destructive hover:text-destructive"
                     >
                       <Trash2 className="w-3 h-3" />
