@@ -48,7 +48,7 @@ export default function Home() {
             </Link>
 
             <a
-              href="/resume.pdf"
+              href="/Darshan-Panchal-Junior-Fullstack-Developer.pdf"
               target="_blank"
               rel="noopener noreferrer"
             >
