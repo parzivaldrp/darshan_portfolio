@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import connectDB from '../lib/connectDB';
+import { connectDB } from '../lib/connectDB';
 import addProject from '../app/api/addProject/route';
 
 const app = express();

@@ -1,6 +1,6 @@
 
-import Project from '@/models/Project.js';
-import { connectDB } from '@/lib/connectDB.js';
+import Project from '@/models/Project';
+import connectDB from '@/lib/connectDB';
 import mongoose from 'mongoose';
 import { NextResponse } from "next/server";
 

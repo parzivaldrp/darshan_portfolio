@@ -1,11 +1,11 @@
-import { connectDB } from "@/lib/connectDB";
-import Project from "@/lib/connectDB";
+import connectDB from "@/lib/connectDB";
+import Project from "@/models/Project";
 import { NextResponse } from "next/server";
 import { getUpdatedFields } from "@/lib/getUpdatedFields";
 import mongoose from "mongoose";
 
 
-export async function PATCH(req) {
+export async function PATCH(req, { params }) {
     try {
         await connectDB();
 
