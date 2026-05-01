@@ -19,7 +19,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { fetchProjects, createProject } from "@/lib/api";
+import { fetchProjects, createProject, updateProject } from "@/lib/api";
 import type { Project, CreateProjectRequest } from "@/types/project";
 import Image from "next/image";
 
@@ -85,10 +85,10 @@ export default function Admin() {
       };
 
       if (editingProject) {
-        // await updateProject({
-        //   id: editingProject._id,
-        //   ...projectData,
-        // });
+        await updateProject(editingProject._id, projectData);
+        // Refresh the projects list so the edited project shows the new details
+        const updatedProjects = await fetchProjects();
+        setProjects(updatedProjects);
       } else {
         await createProject(projectData);
         // Refresh the projects list
@@ -235,15 +235,22 @@ export default function Admin() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="image">Project Images *</Label>
+                    <Label htmlFor="image">
+                      Project Images {editingProject ? "" : "*"}
+                    </Label>
                     <Input
                       id="image"
                       type="file"
                       multiple
                       accept="image/*"
                       onChange={(e) => handleImageChange(e.target.files)}
-                      required
+                      required={!editingProject}
                     />
+                    {editingProject && selectedFiles.length === 0 && (
+                      <div className="text-sm text-muted-foreground">
+                        Leave empty to keep existing images.
+                      </div>
+                    )}
                     {selectedFiles.length > 0 && (
                       <div className="text-sm text-muted-foreground">
                         Selected: {selectedFiles.map(f => f.name).join(', ')}

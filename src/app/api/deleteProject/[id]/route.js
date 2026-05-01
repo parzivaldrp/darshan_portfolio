@@ -9,11 +9,12 @@ export async function DELETE(req, { params }) {
     try {
         await connectDB();
 
-        const { id } = params;
+        // In Next.js 15+ params is a Promise and must be awaited
+        const { id } = await params;
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
 
-            return NextResponse.json({ message: 'Invalid Projecty if' }, { status: 400 });
+            return NextResponse.json({ message: 'Invalid Project ID' }, { status: 400 });
         }
 
         const deleted = await Project.findByIdAndDelete(id);

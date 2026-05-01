@@ -14,11 +14,31 @@ export async function createProject(projectData: CreateProjectRequest) {
     },
     body: JSON.stringify(projectData),
   });
-  
+
   if (!res.ok) {
     const error = await res.json();
     throw new Error(error.error || 'Failed to create project');
   }
-  
+
   return res.json();
-} 
+}
+
+export async function updateProject(
+  id: string,
+  projectData: Partial<CreateProjectRequest>
+) {
+  const res = await fetch(`/api/editProject/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(projectData),
+  });
+
+  if (!res.ok) {
+    const error = await res.json().catch(() => ({}));
+    throw new Error(error.message || error.error || 'Failed to update project');
+  }
+
+  return res.json();
+}

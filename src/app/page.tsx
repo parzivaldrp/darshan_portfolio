@@ -30,10 +30,13 @@ export default function Home() {
             </span>
           </h1>
           <h2 className="text-2xl md:text-3xl font-semibold text-primary animate-slide-up">
-            Aspiring Full Stack Developer
+            Junior Full Stack Developer
           </h2>
           <p className="text-md md:text-md text-muted-foreground max-w-xl animate-slide-up-delayed">
-            Recent Computer Science graduate passionate about creating digital experiences. Eager to apply my skills in React, Node.js, and modern web technologies to build meaningful applications.
+            Computer Science graduate building modern web apps with React,
+            Next.js, TypeScript, and AWS. I ship real projects, sweat the
+            details, and learn fast — looking for a junior role on a team
+            that loves the craft.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 w-full animate-fade-in">
             <Link href="/Project" passHref >
@@ -94,14 +97,20 @@ export default function Home() {
           </div>
         </div>
         {/* Right: Profile Image */}
-        <div className="flex-1 flex justify-center items-center animate-slide-in-right">
-          <div className="relative animate-slide-in-right">
+        <div className="flex-1 flex justify-center items-center">
+          <div className="relative animate-slide-in-right w-full max-w-md">
             <div className="z-10 glass-effect rounded-2xl p-2 hover-glow transition-all-smooth">
-              <div className="aspect-square  rounded-xl overflow-hidden animate-float hover:animate-pulse-glow transition-all-smooth">
+              {/*
+                object-cover fills the square container so there's no gap
+                between the rounded border and the photo. aspect-square
+                keeps the frame consistent regardless of the image's
+                native dimensions.
+              */}
+              <div className="aspect-square rounded-xl overflow-hidden animate-float hover:animate-pulse-glow transition-all-smooth">
                 <Image
                   src="/darshan.png"
-                  alt="Darshan - Aspiring Full Stack Developer"
-                  className="w-full h-full object-contain hover:scale-105 transition-transform duration-500"
+                  alt="Darshan Panchal — Junior Full Stack Developer"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                   width={800}
                   height={800}
                   priority

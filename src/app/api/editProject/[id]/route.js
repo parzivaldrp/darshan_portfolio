@@ -10,8 +10,9 @@ export async function PATCH(req, { params }) {
         await connectDB();
 
         const { ObjectId } = mongoose.Types;
- 
-        const { id } = params;
+
+        // In Next.js 15+ params is a Promise and must be awaited
+        const { id } = await params;
         if (!ObjectId.isValid(id)) {
           return NextResponse.json({ message: "Invalid ID" }, { status: 400 });
         }
