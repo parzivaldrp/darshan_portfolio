@@ -6,7 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { motion, AnimatePresence } from "framer-motion";
-import emailjs from 'emailjs-com'; 
+// Migrated from the deprecated `emailjs-com` (last meaningful release in 2021)
+// to the actively maintained `@emailjs/browser`. The new SDK takes the public
+// key inside an options object instead of as a positional 4th argument, and
+// returns proper Promise types — so the call signature below is slightly
+// different from what older tutorials show.
+import emailjs from '@emailjs/browser';
 import { toast } from 'react-toastify';
 
 
@@ -96,11 +101,14 @@ export default function Contact() {
     setErrorMessage("");
 
     try {
+      // New SDK signature: 4th argument is an options object, not a string.
+      // The publicKey here authorises the request against your EmailJS
+      // account — without it the API returns 403.
       const response = await emailjs.sendForm(
         serviceId,
         templateId,
         formRef.current!,
-        publicKey
+        { publicKey }
       );
 
       // EmailJS returns { status: 200, text: 'OK' } on success. Anything else
@@ -143,14 +151,14 @@ export default function Contact() {
     {
       icon: Phone,
       label: "Phone",
-      value: "+64 288 521 8538",
-      href: "tel:+64-2885218538",
+      value: "+61 485 677 034",
+      href: "tel:+61485677034",
       gradient: "from-emerald-500 to-emerald-600"
     },
     {
       icon: MapPin,
       label: "Location",
-      value: "Wellington, New Zealand",
+      value: "Melbourne, VIC, Australia",
       gradient: "from-purple-500 to-purple-600"
     }
   ];
