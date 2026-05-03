@@ -55,6 +55,8 @@ export default function Contact() {
     setErrors(prev => ({ ...prev, [name]: error }));
   };
 
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -72,17 +74,38 @@ export default function Contact() {
       return;
     }
 
+    // Sanity-check env vars before calling EmailJS — these are public
+    // (NEXT_PUBLIC_*) so they're embedded at build time. If any is missing,
+    // EmailJS gets `undefined` and fails with a useless "something went wrong".
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      console.error("[Contact] EmailJS env vars missing", {
+        serviceId: !!serviceId,
+        templateId: !!templateId,
+        publicKey: !!publicKey,
+      });
+      setStatus("error");
+      setErrorMessage("Email service is not configured. Please email me directly at panchaldarshan507@gmail.com.");
+      return;
+    }
+
     setStatus("sending");
+    setErrorMessage("");
 
     try {
-    await emailjs.sendForm(
+      const response = await emailjs.sendForm(
+        serviceId,
+        templateId,
+        formRef.current!,
+        publicKey
+      );
 
-      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-      formRef.current!,
-      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-    );
-     
+      // EmailJS returns { status: 200, text: 'OK' } on success. Anything else
+      // is unexpected — log it so we can debug from production too.
+      console.log("[Contact] EmailJS response:", response);
 
       setStatus("success");
       setFormData({ name: "", email: "", subject: "", message: "" });
@@ -90,9 +113,22 @@ export default function Contact() {
       setTouched({});
 
       setTimeout(() => setStatus("idle"), 4000);
-    } catch {
+    } catch (err) {
+      // EmailJS errors are { status, text } objects, not Error instances.
+      // Log everything so the user can copy/paste it back to debug.
+      console.error("[Contact] EmailJS sendForm failed:", err);
+
+      // Try to extract a helpful message for the UI.
+      let message = "Something went wrong. Please try again.";
+      if (err && typeof err === "object") {
+        const e = err as { status?: number; text?: string; message?: string };
+        if (e.text) message = `EmailJS error: ${e.text}${e.status ? ` (${e.status})` : ""}`;
+        else if (e.message) message = e.message;
+      }
+
       setStatus("error");
-      setTimeout(() => setStatus("idle"), 3000);
+      setErrorMessage(message);
+      setTimeout(() => setStatus("idle"), 6000);
     }
   };
 
@@ -366,10 +402,23 @@ export default function Contact() {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -10 }}
-                          className="bg-destructive/10 border border-destructive/20 rounded-xl p-4 flex items-center gap-3"
+                          className="bg-destructive/10 border border-destructive/20 rounded-xl p-4 flex items-start gap-3"
                         >
-                          <AlertCircle className="w-5 h-5 text-destructive" />
-                          <p className="text-destructive">{`Something went wrong. Please try again.`}</p>
+                          <AlertCircle className="w-5 h-5 text-destructive shrink-0 mt-0.5" />
+                          <div className="flex-1">
+                            <p className="text-destructive font-medium mb-1">
+                              {errorMessage || "Something went wrong. Please try again."}
+                            </p>
+                            <p className="text-xs text-destructive/70">
+                              If this keeps happening, email me directly at{" "}
+                              <a
+                                href="mailto:panchaldarshan507@gmail.com"
+                                className="underline hover:text-destructive"
+                              >
+                                panchaldarshan507@gmail.com
+                              </a>
+                            </p>
+                          </div>
                         </motion.div>
                       )}
                     </AnimatePresence>

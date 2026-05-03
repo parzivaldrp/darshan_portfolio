@@ -2,7 +2,7 @@
 
 > The live site is the deliverable. This README is for devs and recruiters who landed on the GitHub repo and want a quick read of how it's built.
 
-🌐 **Live:** https://your-portfolio-url.com _(replace with your actual deployed URL)_
+🌐 **Live:** https://darshan-portfolio-rose.vercel.app/
 👤 **Me:** Junior Full Stack Developer based in Melbourne, AU
 📧 **Reach me:** panchaldarshan507@gmail.com · [LinkedIn](https://www.linkedin.com/in/darshan-panchal-11668129a/) · [GitHub](https://github.com/parzivaldrp)
 

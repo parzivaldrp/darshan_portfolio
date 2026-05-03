@@ -50,8 +50,16 @@ export default function Home() {
               </Button>
             </Link>
 
+            {/*
+              Resume is hosted on Google Drive so updating it never requires a
+              redeploy — overwrite the file in Drive (File → Manage versions →
+              Upload new version) and this link instantly serves the new PDF.
+              The /view URL opens Drive's in-browser PDF viewer; from there the
+              user can download with one click. To force-download instead,
+              swap to: https://drive.google.com/uc?export=download&id=<id>
+            */}
             <a
-              href="/Darshan-Panchal-Junior-Developer.pdf"
+              href="https://drive.google.com/file/d/1SAe7m-fO6xsC9LMBHNC9KrfFMXPRBi_c/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -59,7 +67,7 @@ export default function Home() {
                 variant="outline"
                 size="sm"
                 className="text-sm p-5 px-8 font-semibold hover:scale-105 transition-all group"
-                aria-label="About Me"
+                aria-label="View resume"
               >
                 <Files className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 Resume

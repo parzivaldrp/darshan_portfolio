@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# personal documents — resumes, cover letters, etc. should not live in the repo
+*.pdf
+*.docx
